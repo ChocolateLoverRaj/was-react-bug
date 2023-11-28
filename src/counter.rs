@@ -9,12 +9,10 @@ impl Component for Counter {
     fn render(&self) -> VNode {
         let counter = use_state(|| false);
 
+        clones!(mut counter);
         use_effect(
-            {
-                clones!(mut counter);
+            move || {
                 counter.set(|mut _counter| true);
-
-                move || || ()
             },
             Deps::none(),
         );
